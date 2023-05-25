@@ -28,7 +28,7 @@ const Header = () => {
 
     return (
         <Navbar color="light" light container="md" expand="md" sticky={sticky ? "top" : ""}>
-            <NavbarBrand href="/">LOGO</NavbarBrand>
+            <NavbarBrand href="/"><img src="/images/Logo.png" alt="" className="logo"/><span className="text-carbonsavings">CarbonSavings</span></NavbarBrand>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="ms-auto" navbar>
@@ -40,10 +40,13 @@ const Header = () => {
                             <NavLink href="#feature">Features</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="#service">Services</NavLink>
+                            <NavLink href="#service">Challenges</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="#about">About</NavLink>
+                            <NavLink href="#about">Team</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="#calculator">Calculator</NavLink>
                         </NavItem>
                     </Nav>
                 </Nav>

@@ -3,18 +3,22 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Feature from '../components/Feature';
 import Service from '../components/Service';
-import About from '../components/About';
+import Team from '../components/Team';
 import Footer from '../components/Footer';
+import Calculator from '../components/Calculator';
+
 const Index = () => {
   return (
-    <Layout pageTitle="Landing Page Nextjs">
+    <Layout pageTitle="CarbonSavings">
       <Header />
       <Hero />
-      <Feature/>
       <Service />
-      <About />
+      <Feature/>
+      <Team />
+      <Calculator />
       <Footer />
     </Layout>
   )
 }
+
 export default Index;

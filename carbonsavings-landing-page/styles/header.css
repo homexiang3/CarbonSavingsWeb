@@ -1,8 +1,13 @@
 .nav-item {
     padding-left: 50px;
-}
-
+  }
+  
 .navbar {
     padding: 10px 0px;
     line-height: 50px;
+  }
+
+.logo {
+    height: 64px;
+    width: 64px;
 }
