@@ -2,10 +2,10 @@ import React from 'react';
 import { Container, Row, Col } from "reactstrap";
 const Service = () => {
   const services = [
-    { title : "Lorem Ipsum", desc : "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
-    { title : "Lorem Ipsum", desc : "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
-    { title : "Lorem Ipsum", desc : "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
-    { title : "Lorem Ipsum", desc : "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
+    { title : "Earn while you move", desc : "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
+    { title : "Track your progress", desc : "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
+    { title : "Engage and connect", desc : "Join and build a vibrant community who are passionate about sustainable mobility. Share your archievements, inspire others and compete on daily leaderboards" },
+    { title : "Security and transparency", desc : "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
     { title : "Lorem Ipsum", desc : "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
     { title : "Lorem Ipsum", desc : "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" },
   ]
