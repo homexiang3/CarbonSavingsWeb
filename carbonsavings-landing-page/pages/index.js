@@ -1,8 +1,8 @@
 import Layout from "../components/Layout";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
+import Challenge from '../components/Challenge';
 import Feature from '../components/Feature';
-import Service from '../components/Service';
 import Team from '../components/Team';
 import Footer from '../components/Footer';
 import Calculator from '../components/Calculator';
@@ -12,8 +12,8 @@ const Index = () => {
     <Layout pageTitle="CarbonSavings">
       <Header />
       <Hero />
-      <Service />
-      <Feature/>
+      <Feature />
+      <Challenge/>
       <Team />
       <Calculator />
       <Footer />
