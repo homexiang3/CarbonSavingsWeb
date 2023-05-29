@@ -14,7 +14,7 @@ return (
           </Col>
         </Row>
         <Row>
-          <Col lg={4} md={{size: 8 , offset: 0}}>
+          <Col lg={{size:4, offset:0}} md={{ size: 8, offset: 2 }}>
             <Card className="mb-4">
               <CardImg top width="100%" src="/images/Fabio.jpg" alt="Card image cap" />
               <CardBody className="text-center">
@@ -23,7 +23,7 @@ return (
               </CardBody>
             </Card>
           </Col>
-          <Col lg={4} md={{size: 8 , offset: 0}}>
+          <Col lg={{size:4, offset:0}} md={{ size: 8, offset: 2 }}>
           <Card className="mb-4">
               <CardImg top width="100%" src="/images/HongMing.jpg" alt="Card image cap" />
               <CardBody className="text-center">
@@ -32,7 +32,7 @@ return (
               </CardBody>
             </Card>
           </Col>
-          <Col lg={4} md={{size: 8 , offset: 0}}>
+          <Col lg={{size:4, offset:0}} md={{ size: 8, offset: 2 }}>
           <Card>
               <CardImg top width="100%" src="/images/Miquel.png" alt="Card image cap" />
               <CardBody className="text-center">

@@ -25,7 +25,7 @@ a {
 .text-carbonsavings{
   color: #4b8253;
 }
-.text-carbonsavings:hover{
+a.text-carbonsavings:hover{
   color:#223c26 ;
 }
 
@@ -43,7 +43,7 @@ a {
   height:5rem;
 }
 
-
+/* TABS */
 .Tabs {
   width: 80%;
   height: auto;
@@ -58,4 +58,19 @@ a {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+/*CAROUSEL*/
+.carousel-caption{
+  color:black;
+}
+.carousel-control-next,
+.carousel-control-prev , .carousel-indicators  {
+    filter: invert(100%);
+}
+.carousel-item img {
+  height: 400px;
+}
+.technology-img{
+  min-height: 80px;
+  max-height: 120px;
 }

@@ -1,16 +1,39 @@
 import React from 'react';
-import { useState } from 'react';
+import $ from 'jquery';
+import { useState, useEffect, useRef} from 'react';
 import { Container, Row, Col, Form, Label, Input } from 'reactstrap';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {MdHome, MdDirectionsCar, MdRestaurant, MdAnalytics} from 'react-icons/md'
 import 'react-tabs/style/react-tabs.css';
 
+
+const Calculator = () => {
+
 const FormField = (props) => {
   const [value, setValue] = useState('');
-  const applyConversion = (event) => {
+  const [conversion,setConversion] = useState('')
+
+  const handleValue = (e) => {
+    setValue(e.target.value);
+  }
+  const applyConversion = (e) => {
     // 👇 Get input value from "event"
-    setValue((parseFloat(event.target.value)*parseFloat(props.conversion)).toFixed(5));
-  };
+    var conversion = parseFloat((parseFloat(value)*parseFloat(props.conversion)).toFixed(5));
+    setConversion(conversion);
+   
+    var total = parseFloat(conversion) || 0;
+    var inputValue;
+    //home results
+    $(".home-result").each(function(){
+      inputValue = parseFloat(this.value) || 0;
+      total += inputValue;
+      console.log(total);
+    });
+    $("#home-result").html(parseFloat(total).toFixed(5));
+    };
+
+  useEffect(() => applyConversion(),[value])
+
   return (
     <Row className="ps-2 align-items-center">
             <Col lg={3} className="my-2">
@@ -24,8 +47,10 @@ const FormField = (props) => {
                 name={props.inputId}
                 placeholder={props.inputPlaceholder}
                 type="number"
+                value = {value}
                 conversion = {props.conversion}
-                onChange = {applyConversion}
+                onChange = {handleValue}
+                className = {props.inputClass}
               />
            </Col>
            <Col lg={4} className="my-2">
@@ -34,29 +59,30 @@ const FormField = (props) => {
                 name={props.resultId}
                 placeholder="Kg/CO2eq"
                 type="number"
-                disabled="true"
-                value = {value}
+                value = {conversion}
+                readOnly = {true}
                 className = {props.resultClass}
               />
            </Col>
           </Row>
   );
 }
+
 const HomeTab = () => {
   return(
     <Form className="mt-5">
       <Row>
         <Col lg={6} md={8}>
-          <FormField label="Electricity" inputId="electricity" inputPlaceholder="Annual KWh" resultId="electricity-result" conversion="0.273" resultClass="home-result"/>
-          <FormField label="Natural Gas" inputId="natural-gas" inputPlaceholder="Annual m3" resultId="natural-gas-result" conversion="2.124"resultClass="home-result"/>
-          <FormField label="Diesel" inputId="diesel" inputPlaceholder="Annual Kg" resultId="diesel-result" conversion="2.883"resultClass="home-result"/>
-          <FormField label="GLP" inputId="glp" inputPlaceholder="Annual Kg" resultId="glp-result" conversion="2.985"resultClass="home-result"/>
+          <FormField label="Electricity" inputId="electricity" inputPlaceholder="Annual KWh" resultId="electricity-result" conversion="0.273" resultClass="home-result" inputClass="home-input"/>
+          <FormField label="Natural Gas" inputId="natural-gas" inputPlaceholder="Annual m3" resultId="natural-gas-result" conversion="2.124"resultClass="home-result" inputClass="home-input"/>
+          <FormField label="Diesel" inputId="diesel" inputPlaceholder="Annual Kg" resultId="diesel-result" conversion="2.883"resultClass="home-result" inputClass="home-input"/>
+          <FormField label="GLP" inputId="glp" inputPlaceholder="Annual Kg" resultId="glp-result" conversion="2.985"resultClass="home-result" inputClass="home-input"/>
         </Col>
         <Col lg={6} md={8}>
-          <FormField label="Propane" inputId="propane" inputPlaceholder="Annual Kg" resultId="propane-result" conversion="2.94"resultClass="home-result"/>
-          <FormField label="Butane" inputId="butane" inputPlaceholder="Annual Kg" resultId="butane-result" conversion="2.96"resultClass="home-result"/>
-          <FormField label="Wood" inputId="wood" inputPlaceholder="Annual Kg" resultId="wood-result" conversion="1.747"resultClass="home-result"/>
-          <FormField label="Coal" inputId="coal" inputPlaceholder="Annual Kg" resultId="coal-result" conversion="2.667"resultClass="home-result"/>
+          <FormField  label="Propane" inputId="propane" inputPlaceholder="Annual Kg" resultId="propane-result" conversion="2.94"resultClass="home-result" inputClass="home-input"/>
+          <FormField  label="Butane" inputId="butane" inputPlaceholder="Annual Kg" resultId="butane-result" conversion="2.96"resultClass="home-result" inputClass="home-input"/>
+          <FormField  label="Wood" inputId="wood" inputPlaceholder="Annual Kg" resultId="wood-result" conversion="1.747"resultClass="home-result" inputClass="home-input"/>
+          <FormField  label="Coal" inputId="coal" inputPlaceholder="Annual Kg" resultId="coal-result" conversion="2.667"resultClass="home-result" inputClass="home-input"/>
         </Col>
       </Row>
       <Row className="text-center mt-5">
@@ -65,6 +91,7 @@ const HomeTab = () => {
     </Form>
   );
 }
+
 const TransportTab = () => {
   return(
     <Form className="mt-5">
@@ -87,6 +114,7 @@ const TransportTab = () => {
     </Form>
   );
 }
+
 const FoodTab = () => {
   return(
     <Form className="mt-5">
@@ -109,14 +137,24 @@ const FoodTab = () => {
     </Form>
   );
 }
+
 const ResultsTab = () => {
   return(
-    <h2>Results</h2>
+    <div className="text-center mt-5">
+      <h5 className="mt-2">Home Results: 0 KG/CO2e</h5>
+      <h5 className="mt-2">Transport Results: 0 KG/CO2e</h5>
+      <h5 className="mt-2">Food Results: 0 KG/CO2e</h5>
+      <h5 className="mt-2">Total Carbon Footprint: 0 KG/CO2e</h5>
+      <h5 className="mt-5">Global average Carbon Footprint: 0 KG/CO2e</h5>
+      <h5 className="mt-2">National average Carbon Footprint: 0 KG/CO2e</h5>
+    </div>
+    
   );
 }
+
 const CalculatorTabs = () => {
   return(
-      <Tabs className = "Tabs bg-light">
+      <Tabs className = "Tabs bg-light" forceRenderTabPanel = {true}>
         <TabList>
           <Tab><h5>Home</h5> <MdHome size={24}/> </Tab>
           <Tab><h5>Transport</h5> <MdDirectionsCar size={24}/></Tab>
@@ -139,7 +177,7 @@ const CalculatorTabs = () => {
     </Tabs>
   );
 }
-const Calculator = () => {
+//CALCULATOR RENDER
   return (
     <section className="section" id="calculator">
         <Container>
