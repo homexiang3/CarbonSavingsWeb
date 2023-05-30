@@ -1,182 +1,137 @@
 import React from 'react';
-import $ from 'jquery';
-import { useState, useEffect, useRef} from 'react';
-import { Container, Row, Col, Form, Label, Input } from 'reactstrap';
+import { useState, useEffect} from 'react';
+import { Container, Row, Col, Form, Label, Input, Alert } from 'reactstrap';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {MdHome, MdDirectionsCar, MdRestaurant, MdAnalytics} from 'react-icons/md'
+import {MdHome, MdDirectionsCar, MdRestaurant, MdAnalytics, MdTipsAndUpdates, MdWarning, MdCheckCircle} from 'react-icons/md'
 import 'react-tabs/style/react-tabs.css';
 
+const FormField = (props) => {
+  return(
+  <Row className="ps-2 align-items-center">
+          <Col lg={3} className="my-2">
+          <Label for={props.InputId}>
+            {props.label}
+          </Label>
+          </Col>
+          <Col lg={4} className="my-2">
+            <Input
+              id={props.inputId}
+              name={props.inputId}
+              min = "0"
+              placeholder={props.inputPlaceholder}
+              type="number"
+              value = {props.inputVal}
+              conversion = {props.conversion}
+              onChange = {props.inputFunction}
+            />
+         </Col>
+         <Col lg={4} className="my-2">
+            <Input
+              id={props.resultId}
+              min = "0"
+              name={props.resultId}
+              placeholder="Kg/CO2eq"
+              type="number"
+              value = {props.conversionVal}
+              readOnly = {true}
+            />
+         </Col>
+        </Row>
+);}
 
 const Calculator = () => {
 
-const FormField = (props) => {
-  const [value, setValue] = useState('');
-  const [conversion,setConversion] = useState('')
+  const [values, setValues] = useState({
+    electricity:'',
+    naturalGas:'',
+    diesel:'',
+    glp:'',
+    propane:'',
+    butane:'',
+    wood:'',
+    coal:'',
+    gasolineCar:'',
+    dieselCar:'',
+    motorcycle:'',
+    train:'',
+    underground:'',
+    bus:'',
+    flight:'',
+    beefLamb:'',
+    shellfish:'',
+    omeats:'',
+    fish:'',
+    milkYoghurt:'',
+    cheeseButter:'',
+    fvc:''
+  });
+  const [conversions, setConversions] = useState({
+    celectricity:'',
+    cnaturalGas:'',
+    cdiesel:'',
+    cglp:'',
+    cpropane:'',
+    cbutane:'',
+    cwood:'',
+    ccoal:'',
+    cgasolineCar:'',
+    cdieselCar:'',
+    cmotorcycle:'',
+    ctrain:'',
+    cunderground:'',
+    cbus:'',
+    cflight:'',
+    cbeefLamb:'',
+    cshellfish:'',
+    comeats:'',
+    cfish:'',
+    cmilkYoghurt:'',
+    ccheeseButter:'',
+    cfvc:''
+  });
+  const[homeTotal, setHomeTotal] = useState(0);
+  const[transportTotal, setTransportTotal] = useState(0);
+  const[foodTotal, setFoodTotal] = useState(0);
+  const[total,setTotal] = useState(0);
+  const globalAverage = 4650;
+  const nationalAverage = 6220;
 
   const handleValue = (e) => {
-    setValue(e.target.value);
-  }
-  const applyConversion = (e) => {
-    // 👇 Get input value from "event"
-    var conversion = parseFloat((parseFloat(value)*parseFloat(props.conversion)).toFixed(5));
-    setConversion(conversion);
-   
-    var total = parseFloat(conversion) || 0;
-    var inputValue;
-    //home results
-    $(".home-result").each(function(){
-      inputValue = parseFloat(this.value) || 0;
-      total += inputValue;
-      console.log(total);
+    let name = e.target.name;
+    let value = e.target.value;
+    let conversion = (parseFloat(value)*parseFloat(e.target.getAttribute('conversion'))).toFixed(4);
+    setValues({
+      ...values,
+      [name]: value
     });
-    $("#home-result").html(parseFloat(total).toFixed(5));
-    };
+    let cName = "c" + name;
+    const conversionValues = {
+      ...conversions,
+      [cName]: +conversion
+    }
+    setConversions(conversionValues);
+  }
+  const homeConversions = [conversions.celectricity,conversions.cnaturalGas,conversions.cdiesel,conversions.cglp,conversions.cpropane,conversions.cbutane,conversions.cwood,conversions.ccoal]
+  const transportConversions = [conversions.cgasolineCar,conversions.cdieselCar,conversions.cmotorcycle,conversions.ctrain,conversions.cunderground,conversions.cbus, conversions.cflight]
+  const foodConversions = [conversions.cbeefLamb,conversions.cshellfish,conversions.comeats,conversions.cfish,conversions.cmilkYoghurt,conversions.ccheeseButter,conversions.cfvc]
 
-  useEffect(() => applyConversion(),[value])
+  function getSum(sectionConversions,sectionFunc) {
+    //change values of section
+    const sectionValues = Object.values(sectionConversions);
+    const sectionCleanValues = sectionValues.filter(Boolean)
+    let sectionSum = sectionCleanValues.reduce((acc, c) => acc + c, 0);
+    sectionFunc(parseFloat(sectionSum).toFixed(4));
+    //change total values
+    const totalValues = Object.values(conversions);
+    const totalCleanValues = totalValues.filter(Boolean)
+    let totalSum = totalCleanValues.reduce((acc, c) => acc + c, 0);
+    setTotal(parseFloat(totalSum).toFixed(4));
+  }
+  useEffect(() => getSum(homeConversions,setHomeTotal), homeConversions);
+  useEffect(() => getSum(transportConversions,setTransportTotal), transportConversions);
+  useEffect(() => getSum(foodConversions,setFoodTotal), foodConversions);
 
-  return (
-    <Row className="ps-2 align-items-center">
-            <Col lg={3} className="my-2">
-            <Label for={props.inputId}>
-              {props.label}
-            </Label>
-            </Col>
-            <Col lg={4} className="my-2">
-              <Input
-                id={props.inputId}
-                name={props.inputId}
-                placeholder={props.inputPlaceholder}
-                type="number"
-                value = {value}
-                conversion = {props.conversion}
-                onChange = {handleValue}
-                className = {props.inputClass}
-              />
-           </Col>
-           <Col lg={4} className="my-2">
-              <Input
-                id={props.resultId}
-                name={props.resultId}
-                placeholder="Kg/CO2eq"
-                type="number"
-                value = {conversion}
-                readOnly = {true}
-                className = {props.resultClass}
-              />
-           </Col>
-          </Row>
-  );
-}
 
-const HomeTab = () => {
-  return(
-    <Form className="mt-5">
-      <Row>
-        <Col lg={6} md={8}>
-          <FormField label="Electricity" inputId="electricity" inputPlaceholder="Annual KWh" resultId="electricity-result" conversion="0.273" resultClass="home-result" inputClass="home-input"/>
-          <FormField label="Natural Gas" inputId="natural-gas" inputPlaceholder="Annual m3" resultId="natural-gas-result" conversion="2.124"resultClass="home-result" inputClass="home-input"/>
-          <FormField label="Diesel" inputId="diesel" inputPlaceholder="Annual Kg" resultId="diesel-result" conversion="2.883"resultClass="home-result" inputClass="home-input"/>
-          <FormField label="GLP" inputId="glp" inputPlaceholder="Annual Kg" resultId="glp-result" conversion="2.985"resultClass="home-result" inputClass="home-input"/>
-        </Col>
-        <Col lg={6} md={8}>
-          <FormField  label="Propane" inputId="propane" inputPlaceholder="Annual Kg" resultId="propane-result" conversion="2.94"resultClass="home-result" inputClass="home-input"/>
-          <FormField  label="Butane" inputId="butane" inputPlaceholder="Annual Kg" resultId="butane-result" conversion="2.96"resultClass="home-result" inputClass="home-input"/>
-          <FormField  label="Wood" inputId="wood" inputPlaceholder="Annual Kg" resultId="wood-result" conversion="1.747"resultClass="home-result" inputClass="home-input"/>
-          <FormField  label="Coal" inputId="coal" inputPlaceholder="Annual Kg" resultId="coal-result" conversion="2.667"resultClass="home-result" inputClass="home-input"/>
-        </Col>
-      </Row>
-      <Row className="text-center mt-5">
-      <h5>Result: <span id="home-result">0</span> KG/CO2e</h5>
-      </Row>
-    </Form>
-  );
-}
-
-const TransportTab = () => {
-  return(
-    <Form className="mt-5">
-      <Row>
-        <Col lg={6} md={8}>
-          <FormField label="Gasoline Car" inputId="gasoline-car" inputPlaceholder="Annual Km" resultId="gasoline-car-result" conversion="0.18855"/>
-          <FormField label="Diesel Car" inputId="diesel-car" inputPlaceholder="Annual Km" resultId="diesel-car-result" conversion="0.15525"/>
-          <FormField label="Motorcycle" inputId="motorcycle" inputPlaceholder="Annual Km" resultId="motorcycle-result" conversion="0.11314"/>
-          <FormField label="Train" inputId="train" inputPlaceholder="Annual Km" resultId="train-result" conversion="0.03258"/>
-        </Col>
-        <Col lg={6} md={8}>
-          <FormField label="Underground" inputId="underground" inputPlaceholder="Annual Km" resultId="underground-result" conversion="0.0566"/>
-          <FormField label="Bus" inputId="bus" inputPlaceholder="Annual Km" resultId="bus-result" conversion="0.07392"/>
-          <FormField label="Flight" inputId="flight" inputPlaceholder="Annual Km" resultId="flight-result" conversion="0.15"/>
-        </Col>
-      </Row>
-      <Row className="text-center mt-5">
-      <h5>Result: <span id="transport-result">0</span> KG/CO2e</h5>
-      </Row>
-    </Form>
-  );
-}
-
-const FoodTab = () => {
-  return(
-    <Form className="mt-5">
-      <Row>
-        <Col lg={6} md={8}>
-          <FormField label="Beef & Lamb" inputId="beef-lamb" inputPlaceholder="Annual Kg" resultId="beef-lamb-result" conversion="28.32"/>
-          <FormField label="Shellfish" inputId="shellfish" inputPlaceholder="Annual Kg" resultId="shellfish-result" conversion="14.71"/>
-          <FormField label="Other meats & eggs" inputId="omeaths-eggs" inputPlaceholder="Annual Kg" resultId="omeats-eggs-result" conversion="4.82"/>
-          <FormField label="fish" inputId="fish" inputPlaceholder="Annual Kg" resultId="fish-result" conversion="4.41"/>
-        </Col>
-        <Col lg={6} md={8}>
-          <FormField label="Milk & yoghurt" inputId="milk-yoghurt" inputPlaceholder="Annual Kg" resultId="milk-yoghurt-result" conversion="1.4"/>
-          <FormField label="Cheese & butter" inputId="cheese-butter" inputPlaceholder="Annual Kg" resultId="cheese-butter-result" conversion="10.19"/>
-          <FormField label="Fruits & vegetables & cereals" inputId="fruits-vegetables-cereals" inputPlaceholder="Annual Kg" resultId="fruits-vegetables-cereals-result" conversion="0.5"/>
-        </Col>
-      </Row>
-      <Row className="text-center mt-5">
-      <h5>Result: <span id="food-result">0</span> KG/CO2e</h5>
-      </Row>
-    </Form>
-  );
-}
-
-const ResultsTab = () => {
-  return(
-    <div className="text-center mt-5">
-      <h5 className="mt-2">Home Results: 0 KG/CO2e</h5>
-      <h5 className="mt-2">Transport Results: 0 KG/CO2e</h5>
-      <h5 className="mt-2">Food Results: 0 KG/CO2e</h5>
-      <h5 className="mt-2">Total Carbon Footprint: 0 KG/CO2e</h5>
-      <h5 className="mt-5">Global average Carbon Footprint: 0 KG/CO2e</h5>
-      <h5 className="mt-2">National average Carbon Footprint: 0 KG/CO2e</h5>
-    </div>
-    
-  );
-}
-
-const CalculatorTabs = () => {
-  return(
-      <Tabs className = "Tabs bg-light" forceRenderTabPanel = {true}>
-        <TabList>
-          <Tab><h5>Home</h5> <MdHome size={24}/> </Tab>
-          <Tab><h5>Transport</h5> <MdDirectionsCar size={24}/></Tab>
-          <Tab><h5>Food</h5> <MdRestaurant size={24}/></Tab>
-          <Tab><h5>Results</h5> <MdAnalytics size={24}/></Tab>
-        </TabList>
-
-        <TabPanel>
-          <HomeTab/>
-        </TabPanel>
-        <TabPanel>
-          <TransportTab/>
-        </TabPanel>
-        <TabPanel>
-          <FoodTab/>
-        </TabPanel>
-        <TabPanel>
-          <ResultsTab/>
-        </TabPanel>
-    </Tabs>
-  );
-}
 //CALCULATOR RENDER
   return (
     <section className="section" id="calculator">
@@ -189,7 +144,121 @@ const CalculatorTabs = () => {
               </Col>
             </Row>
             <Row>
-              <CalculatorTabs></CalculatorTabs>
+              <Tabs className = "Tabs bg-light shadow">
+                <TabList>
+                  <Tab><h5>Home</h5> <MdHome size={24}/> </Tab>
+                  <Tab><h5>Transport</h5> <MdDirectionsCar size={24}/></Tab>
+                  <Tab><h5>Food</h5> <MdRestaurant size={24}/></Tab>
+                  <Tab><h5>Results</h5> <MdAnalytics size={24}/></Tab>
+                </TabList>
+
+                <TabPanel>
+                  <Row className="mt-5">
+                    <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
+                      <FormField label="Electricity" inputId="electricity" inputVal={values.electricity} conversionVal={conversions.celectricity} inputFunction ={handleValue} inputPlaceholder="Annual KWh" resultId="celectricity" conversion="0.273" />
+                      <FormField label="Natural Gas" inputId="naturalGas" inputVal={values.naturalGas} conversionVal={conversions.cnaturalGas} inputFunction ={handleValue} inputPlaceholder="Annual m3" resultId="cnaturalGas" conversion="2.124"/>
+                      <FormField label="Diesel" inputId="diesel" inputVal={values.diesel} conversionVal={conversions.cdiesel} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cdiesel" conversion="2.883"/>
+                      <FormField label="GLP" inputId="glp" inputVal={values.glp} conversionVal={conversions.cglp} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cglp" conversion="2.985"/>
+                    </Col>
+                    <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
+                      <FormField  label="Propane" inputId="propane" inputVal={values.propane} conversionVal={conversions.cpropane} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cpropane" conversion="2.94"/>
+                      <FormField  label="Butane" inputId="butane" inputVal={values.butane} conversionVal={conversions.cbutane} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cbutane" conversion="2.96"/>
+                      <FormField  label="Wood" inputId="wood" inputVal={values.wood} conversionVal={conversions.cwood} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cwood" conversion="1.747"/>
+                      <FormField  label="Coal" inputId="coal" inputVal={values.coal} conversionVal={conversions.ccoal} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="ccoal" conversion="2.667"/>
+                    </Col>
+                  </Row>
+                  <Row className="text-center mt-5">
+                    <Col lg={{size:8,offset:2}}>
+                      <Alert color="warning" fade={false}>
+                        <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Reduce household consumption and use renewable energies
+                      </Alert>
+                      <h5>Home Carbon Footprint: <span id="home-result">{homeTotal}</span> KG/CO2e</h5>
+                    </Col>
+                  </Row>
+                </TabPanel>
+                <TabPanel>
+                  <Row className="mt-5">
+                    <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
+                      <FormField label="Gasoline Car" inputId="gasolineCar" inputVal={values.gasolineCar} conversionVal={conversions.cgasolineCar} inputFunction ={handleValue} inputPlaceholder="Annual Km" resultId="cgasolineCar" conversion="0.18855"/>
+                      <FormField label="Diesel Car" inputId="dieselCar" inputVal={values.dieselCar} conversionVal={conversions.cdieselCar} inputFunction ={handleValue}inputPlaceholder="Annual Km" resultId="cdieselCar" conversion="0.15525"/>
+                      <FormField label="Motorcycle" inputId="motorcycle" inputVal={values.motorcycle} conversionVal={conversions.cmotorcycle} inputFunction ={handleValue}inputPlaceholder="Annual Km" resultId="cmotorcycle" conversion="0.11314"/>
+                      <FormField label="Train" inputId="train"inputVal={values.train} conversionVal={conversions.ctrain} inputFunction ={handleValue} inputPlaceholder="Annual Km" resultId="ctrain" conversion="0.03258"/>
+                    </Col>
+                    <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
+                      <FormField label="Underground" inputId="underground" inputVal={values.underground} conversionVal={conversions.cunderground} inputFunction ={handleValue}inputPlaceholder="Annual Km" resultId="cunderground" conversion="0.0566"/>
+                      <FormField label="Bus" inputId="bus" inputVal={values.bus} conversionVal={conversions.cbus} inputFunction ={handleValue}inputPlaceholder="Annual Km" resultId="cbus" conversion="0.07392"/>
+                      <FormField label="Flight" inputId="flight" inputVal={values.flight} conversionVal={conversions.cflight} inputFunction ={handleValue} inputPlaceholder="Annual Km" resultId="cflight" conversion="0.15"/>
+                    </Col>
+                  </Row>
+                  <Row className="text-center mt-5">
+                    <Col lg={{size:8,offset:2}}>
+                      <Alert color="warning" fade={false}>
+                        <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Use public & shared transport alternatives and avoid flights
+                      </Alert>
+                      <h5>Transport Carbon Footprint: <span id="transport-result">{transportTotal}</span> KG/CO2e</h5>
+                    </Col>
+                  </Row>
+                </TabPanel>
+                <TabPanel>
+                  <Row className="mt-5">
+                    <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
+                      <FormField label="Beef & Lamb" inputId="beefLamb" inputVal={values.beefLamb} conversionVal={conversions.cbeefLamb} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cbeefLamb" conversion="28.32"/>
+                      <FormField label="Shellfish" inputId="shellfish" inputVal={values.shellfish} conversionVal={conversions.cshellfish} inputFunction ={handleValue}inputPlaceholder="Annual Kg" resultId="cshellfish" conversion="14.71"/>
+                      <FormField label="Other meats & eggs" inputId="omeats" inputVal={values.omeats} conversionVal={conversions.comeats} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="comeats" conversion="4.82"/>
+                      <FormField label="fish" inputId="fish" inputVal={values.fish} conversionVal={conversions.cfish} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cfish" conversion="4.41"/>
+                    </Col>
+                    <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
+                      <FormField label="Milk & yoghurt" inputId="milkYoghurt" inputVal={values.milkYoghurt} conversionVal={conversions.cmilkYoghurt} inputFunction ={handleValue}inputPlaceholder="Annual Kg" resultId="cmilkYoghurt" conversion="1.4"/>
+                      <FormField label="Cheese & butter" inputId="cheeseButter" inputVal={values.cheeseButter} conversionVal={conversions.ccheeseButter} inputFunction ={handleValue}inputPlaceholder="Annual Kg" resultId="ccheeseButter" conversion="10.19"/>
+                      <FormField label="Fruits & vegetables & cereals" inputId="fvc" inputVal={values.fvc} conversionVal={conversions.cfvc} inputFunction ={handleValue}inputPlaceholder="Annual Kg" resultId="cfvc" conversion="0.5"/>
+                    </Col>
+                  </Row>
+                  <Row className="text-center mt-5">
+                    <Col lg={{size:8,offset:2}}>
+                      <Alert color="warning" fade={false}>
+                        <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Reduce animal consumption and introduce more fruits, vegetables and cereals
+                      </Alert>
+                      <h5>Food Carbon Footprint: <span id="food-result">{foodTotal}</span> KG/CO2e</h5>
+                    </Col>
+                  </Row>
+                </TabPanel>
+                <TabPanel>
+                <div className="text-center mt-5">
+                  <Row>
+                    <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
+                      <h5 className='mt-4'>User Carbon Footprint</h5>
+                      <p className="mt-4">Home Carbon Footprint: <span className="fw-bold">{homeTotal} KG/CO2e</span></p>
+                      <p className="mt-4">Transport Carbon Footprint: <span className="fw-bold">{transportTotal} KG/CO2e</span></p>
+                      <p className="mt-4">Food Carbon Footprint: <span className="fw-bold">{foodTotal} KG/CO2e</span></p>
+                      <p className="mt-4">Total Carbon Footprint: <span className="fw-bold">{total} KG/CO2e</span></p>
+                    </Col>
+                    <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
+                      <h5 className='mt-3'>Average Carbon Footprint</h5>
+                      <p className="mt-3">Global average Carbon Footprint: <span className="fw-bold">{globalAverage} KG/CO2e</span></p>
+                      {total >= globalAverage ?
+                        <Alert color="danger" className="mx-5" fade={false}>
+                          <MdWarning size={24}  className="me-3"/>Worse or equal than global average!
+                        </Alert>
+                        :
+                        <Alert color="success" className="mx-5" fade={false}>
+                          <MdCheckCircle size={24}  className="me-3"/>Better than global average!
+                        </Alert>
+                      }
+                      <p className="mt-3">National average Carbon Footprint: <span className="fw-bold">{nationalAverage} KG/CO2e</span></p>
+                      {total >= nationalAverage ?
+                        <Alert color="danger" className="mx-5" fade={false}>
+                          <MdWarning size={24} className="me-3"/>Worse or equal than national average!
+                        </Alert>
+                        :
+                        <Alert color="success" className="mx-5" fade={false}>
+                          <MdCheckCircle size={24}  className="me-3"/>Better than national average!
+                        </Alert>
+                      }
+                    </Col>
+                  </Row>
+                  </div>
+                </TabPanel>
+              </Tabs>
             </Row>
         </Container>
     </section>
