@@ -27,7 +27,7 @@ const Header = () => {
     }
 
     return (
-        <Navbar color="light" light container="md" expand="md" sticky={sticky ? "top" : ""}>
+        <Navbar color="light" light container="md" expand="md" className="shadow-sm" sticky={sticky ? "top" : ""}>
             <NavbarBrand href="/"><img src="/images/Logo.png" alt="" className="logo"/><span className="text-carbonsavings">CarbonSavings</span></NavbarBrand>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>

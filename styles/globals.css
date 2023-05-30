@@ -44,6 +44,12 @@ a.text-carbonsavings:hover{
 }
 
 /* TABS */
+.calculator-tabs{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 .Tabs {
   width: 80%;
   height: auto;
@@ -52,13 +58,53 @@ a.text-carbonsavings:hover{
   padding: 2rem 1rem;
   border-radius: 2rem;
 }
+.react-tabs {
+  -webkit-tap-highlight-color: transparent;
+}
 
 .react-tabs__tab-list {
   display: flex;
   align-items: center;
-  justify-content: center;
   text-align: center;
+  justify-content: space-evenly;
+  border: 1px solid #aaa;
+  border-radius: 2rem;
 }
+.react-tabs__tab {
+  width: 50%;
+  padding: 1rem;
+  list-style: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.7s;
+  bottom:0px !important;
+}
+
+.react-tabs__tab--selected {
+  background: #93ce9c !important;
+  border-radius:0px !important;
+  border-color:#93ce9c !important;
+  border-bottom:0px !important;
+}
+.react-tabs__tab:focus:after {
+  background: rgb(255, 255, 255,0) !important;
+}
+ 
+.react-tabs__tab:hover {
+  background: rgba(135, 135, 135, 0.15);
+}
+ 
+.react-tabs__tab:first-child,.react-tabs__tab--selected:first-child {
+  border-bottom-left-radius: 2rem !important;
+  border-top-left-radius: 2rem !important;
+}
+ 
+.react-tabs__tab:last-child, .react-tabs__tab--selected:last-child {
+  border-bottom-right-radius: 2rem !important;
+  border-top-right-radius: 2rem !important;
+}
+ 
+
 /*CAROUSEL*/
 .carousel-caption{
   color:black;
@@ -70,7 +116,14 @@ a.text-carbonsavings:hover{
 .carousel-item img {
   height: 400px;
 }
+/* Technologies */
+.technology-img-wrapper{
+  overflow:hidden;
+}
 .technology-img{
   min-height: 80px;
   max-height: 120px;
+}
+.technology-img:hover{
+  transform:scale(1.2);
 }

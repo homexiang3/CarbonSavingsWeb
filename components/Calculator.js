@@ -30,7 +30,7 @@ const FormField = (props) => {
               id={props.resultId}
               min = "0"
               name={props.resultId}
-              placeholder="Kg/CO2eq"
+              placeholder="Kg/CO2e"
               type="number"
               value = {props.conversionVal}
               readOnly = {true}
@@ -144,6 +144,7 @@ const Calculator = () => {
               </Col>
             </Row>
             <Row>
+              <div className="calculator-tabs">
               <Tabs className = "Tabs bg-light shadow">
                 <TabList>
                   <Tab><h5>Home</h5> <MdHome size={24}/> </Tab>
@@ -172,7 +173,7 @@ const Calculator = () => {
                       <Alert color="warning" fade={false}>
                         <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Reduce household consumption and use renewable energies
                       </Alert>
-                      <h5>Home Carbon Footprint: <span id="home-result">{homeTotal}</span> KG/CO2e</h5>
+                      <h5>Home Carbon Footprint: <span id="home-result">{homeTotal}</span> Kg/CO<sub>2</sub>e</h5>
                     </Col>
                   </Row>
                 </TabPanel>
@@ -195,7 +196,7 @@ const Calculator = () => {
                       <Alert color="warning" fade={false}>
                         <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Use public & shared transport alternatives and avoid flights
                       </Alert>
-                      <h5>Transport Carbon Footprint: <span id="transport-result">{transportTotal}</span> KG/CO2e</h5>
+                      <h5>Transport Carbon Footprint: <span id="transport-result">{transportTotal}</span> Kg/CO<sub>2</sub>e</h5>
                     </Col>
                   </Row>
                 </TabPanel>
@@ -218,7 +219,7 @@ const Calculator = () => {
                       <Alert color="warning" fade={false}>
                         <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Reduce animal consumption and introduce more fruits, vegetables and cereals
                       </Alert>
-                      <h5>Food Carbon Footprint: <span id="food-result">{foodTotal}</span> KG/CO2e</h5>
+                      <h5>Food Carbon Footprint: <span id="food-result">{foodTotal}</span> Kg/CO<sub>2</sub>e</h5>
                     </Col>
                   </Row>
                 </TabPanel>
@@ -227,14 +228,14 @@ const Calculator = () => {
                   <Row>
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
                       <h5 className='mt-4'>User Carbon Footprint</h5>
-                      <p className="mt-4">Home Carbon Footprint: <span className="fw-bold">{homeTotal} KG/CO2e</span></p>
-                      <p className="mt-4">Transport Carbon Footprint: <span className="fw-bold">{transportTotal} KG/CO2e</span></p>
-                      <p className="mt-4">Food Carbon Footprint: <span className="fw-bold">{foodTotal} KG/CO2e</span></p>
-                      <p className="mt-4">Total Carbon Footprint: <span className="fw-bold">{total} KG/CO2e</span></p>
+                      <p className="mt-4">Home Carbon Footprint: <span className="fw-bold">{homeTotal} Kg/CO<sub>2</sub>e</span></p>
+                      <p className="mt-4">Transport Carbon Footprint: <span className="fw-bold">{transportTotal} KG/CO<sub>2</sub>e</span></p>
+                      <p className="mt-4">Food Carbon Footprint: <span className="fw-bold">{foodTotal} KG/CO<sub>2</sub>e</span></p>
+                      <p className="mt-4">Total Carbon Footprint: <span className="fw-bold">{total} KG/CO<sub>2</sub>e</span></p>
                     </Col>
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
                       <h5 className='mt-3'>Average Carbon Footprint</h5>
-                      <p className="mt-3">Global average Carbon Footprint: <span className="fw-bold">{globalAverage} KG/CO2e</span></p>
+                      <p className="mt-3">Global average Carbon Footprint: <span className="fw-bold">{globalAverage} KG/CO<sub>2</sub>e</span></p>
                       {total >= globalAverage ?
                         <Alert color="danger" className="mx-5" fade={false}>
                           <MdWarning size={24}  className="me-3"/>Worse or equal than global average!
@@ -244,7 +245,7 @@ const Calculator = () => {
                           <MdCheckCircle size={24}  className="me-3"/>Better than global average!
                         </Alert>
                       }
-                      <p className="mt-3">National average Carbon Footprint: <span className="fw-bold">{nationalAverage} KG/CO2e</span></p>
+                      <p className="mt-3">National average Carbon Footprint: <span className="fw-bold">{nationalAverage} KG/CO<sub>2</sub>e</span></p>
                       {total >= nationalAverage ?
                         <Alert color="danger" className="mx-5" fade={false}>
                           <MdWarning size={24} className="me-3"/>Worse or equal than national average!
@@ -259,6 +260,7 @@ const Calculator = () => {
                   </div>
                 </TabPanel>
               </Tabs>
+              </div>
             </Row>
         </Container>
     </section>
