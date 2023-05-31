@@ -71,7 +71,7 @@ a.text-carbonsavings:hover{
   border-radius: 2rem;
 }
 .react-tabs__tab {
-  width: 50%;
+  width: 25%;
   padding: 1rem;
   list-style: none;
   text-align: center;
@@ -107,14 +107,14 @@ a.text-carbonsavings:hover{
 
 /*CAROUSEL*/
 .carousel-caption{
-  color:black;
+  display:none !important;
 }
 .carousel-control-next,
 .carousel-control-prev , .carousel-indicators  {
     filter: invert(100%);
 }
 .carousel-item img {
-  height: 400px;
+  height: 450px;
 }
 /* Technologies */
 .technology-img-wrapper{

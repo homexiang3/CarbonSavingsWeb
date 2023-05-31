@@ -4,26 +4,32 @@ import {MdLock, MdPayments, MdInsertChart, MdGroups} from 'react-icons/md'
 
 const Feature = () => {
   const features = [
-    { title : "In-app economy", icon: <MdPayments size={32}/>, desc : "Gain our native CarbonSavings Token with your physical activity. Purchase one of our amazing NFTs to boost your daily effort or donate to mitigate your carbon footprint" },
-    { title : "Track your progress",icon: <MdInsertChart size={32}/>, desc : "Visualize your daily and historical data such as the number of steps, the rewards obtained and the carbon footprint mitigated in a friendly interface. Set your daily goals and trascend your limits" },
-    { title : "Engage and connect", icon: <MdGroups size={32}/>,desc : "Join and build a vibrant community who are passionate about sustainable mobility. Share your archievements, inspire others and compete on daily leaderboards" },
-    { title : "Security and transparency", icon: <MdLock size={32}/>,desc : "Leverage the power of blockchain technologies. Ethereum is one of the most trusted networks, which provides a decentralized, transparent and secure way to manage your data" },
+    { title : "In-app economy", icon: <MdPayments size={32}/>, desc : "Earn our native CarbonSavings Token by staying active and contribute to a sustainable future. Enhance your daily efforts by acquiring unique NFTs from our collection or make a positive impact by donating to offset your carbon footprint." },
+    { title : "Track your progress",icon: <MdInsertChart size={32}/>, desc : "Monitor your daily and historical data, including step count, rewards earned and carbon footprint mitigated using our user-friendly interface.  Set personal goals, stay motivated and push beyond your limits." },
+    { title : "Engage and connect", icon: <MdGroups size={32}/>,desc : "Join and build a vibrant community who are passionate about sustainable mobility. Share your archievements, inspire others and and foster friendly competition through our daily leaderboards." },
+    { title : "Security and transparency", icon: <MdLock size={32}/>,desc : "Benefit from the robustness of blockchain technology and leverage the power of Ethereum. Enjoy the advantages of a decentralized, transparent, and secure platform that ensures the reliable management of your data." },
   ]
   const carouselItems = [
     {
-      src: '/images/Earth.png',
+      src: '/images/Carousel1.png',
       altText: 'Slide 1',
       caption: 'Slide 1',
       header: 'Slide 1 Header'
     },
     {
-      src: '/images/Subway.png',
+      src: '/images/Carousel2.png',
       altText: 'Slide 2',
       caption: 'Slide 2',
       header: 'Slide 2 Header'
     },
     {
-      src: '/images/Tree.png',
+      src: '/images/Carousel3.png',
+      altText: 'Slide 3',
+      caption: 'Slide 3',
+      header: 'Slide 3 Header'
+    },
+    {
+      src: '/images/Carousel4.png',
       altText: 'Slide 3',
       caption: 'Slide 3',
       header: 'Slide 3 Header'
@@ -67,7 +73,7 @@ const Feature = () => {
           </Row>
         </Col>
         <Col lg={{size:5, offset:0}} md={{size:8, offset:2}}>
-          <UncontrolledCarousel className="mt-5" items={carouselItems}/>
+          <UncontrolledCarousel controls={false} indicators={false} interval={5000} className="mt-5" items={carouselItems}/>
         </Col>
         </Row>
         <Row className="mt-5 text-center">

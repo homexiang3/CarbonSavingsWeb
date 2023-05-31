@@ -9,6 +9,8 @@ return (
           <Col lg={6} md={8}>
             <div className="title text-center">
               <h2 className="font-weight-normal text-dark mb-5">CarbonSavings Team</h2>
+              <p className="text-muted mb-5">Our project team is formed by members of Universitat Pompeu Fabra Engineering School located in Barcelona. Hong-ming is the student 
+              developing CarbonSavings while Fabio and Miquel are teachers that offer mentorship</p>
               <img src="/images/UPF.png" alt="" className="img-fluid mb-5 mx-auto d-block upf-img"/>
             </div>
           </Col>
@@ -41,8 +43,7 @@ return (
               </CardBody>
             </Card>
           </Col>
-        </Row>
-            
+        </Row>  
       </Container>
     </section>
   );

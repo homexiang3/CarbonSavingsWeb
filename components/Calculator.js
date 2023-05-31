@@ -131,7 +131,6 @@ const Calculator = () => {
   useEffect(() => getSum(transportConversions,setTransportTotal), transportConversions);
   useEffect(() => getSum(foodConversions,setFoodTotal), foodConversions);
 
-
 //CALCULATOR RENDER
   return (
     <section className="section" id="calculator">
@@ -229,13 +228,13 @@ const Calculator = () => {
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
                       <h5 className='mt-4'>User Carbon Footprint</h5>
                       <p className="mt-4">Home Carbon Footprint: <span className="fw-bold">{homeTotal} Kg/CO<sub>2</sub>e</span></p>
-                      <p className="mt-4">Transport Carbon Footprint: <span className="fw-bold">{transportTotal} KG/CO<sub>2</sub>e</span></p>
-                      <p className="mt-4">Food Carbon Footprint: <span className="fw-bold">{foodTotal} KG/CO<sub>2</sub>e</span></p>
-                      <p className="mt-4">Total Carbon Footprint: <span className="fw-bold">{total} KG/CO<sub>2</sub>e</span></p>
+                      <p className="mt-4">Transport Carbon Footprint: <span className="fw-bold">{transportTotal} Kg/CO<sub>2</sub>e</span></p>
+                      <p className="mt-4">Food Carbon Footprint: <span className="fw-bold">{foodTotal} Kg/CO<sub>2</sub>e</span></p>
+                      <p className="mt-4 text-carbonsavings">Total Carbon Footprint: <span className="fw-bold">{total} Kg/CO<sub>2</sub>e</span></p>
                     </Col>
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
                       <h5 className='mt-3'>Average Carbon Footprint</h5>
-                      <p className="mt-3">Global average Carbon Footprint: <span className="fw-bold">{globalAverage} KG/CO<sub>2</sub>e</span></p>
+                      <p className="mt-3">Global average Carbon Footprint: <span className="fw-bold">{globalAverage} Kg/CO<sub>2</sub>e</span></p>
                       {total >= globalAverage ?
                         <Alert color="danger" className="mx-5" fade={false}>
                           <MdWarning size={24}  className="me-3"/>Worse or equal than global average!
@@ -245,7 +244,7 @@ const Calculator = () => {
                           <MdCheckCircle size={24}  className="me-3"/>Better than global average!
                         </Alert>
                       }
-                      <p className="mt-3">National average Carbon Footprint: <span className="fw-bold">{nationalAverage} KG/CO<sub>2</sub>e</span></p>
+                      <p className="mt-3">National average Carbon Footprint: <span className="fw-bold">{nationalAverage} Kg/CO<sub>2</sub>e</span></p>
                       {total >= nationalAverage ?
                         <Alert color="danger" className="mx-5" fade={false}>
                           <MdWarning size={24} className="me-3"/>Worse or equal than national average!

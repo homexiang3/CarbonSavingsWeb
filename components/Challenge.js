@@ -1,12 +1,20 @@
 import React from 'react';
 import { Container, Row, Col } from "reactstrap";
+import { motion } from "framer-motion"
 const ChallengeBox = (props) => {
   return (
     <>
     {
       props.challenges.map((challenge, key) =>
       (challenge.id % 2 !== 0) ?
-        <Row key={key} className={challenge.id === 1 ? "align-items-center" : "align-items-center mt-5"}>
+      <motion.div
+      key={key}
+      initial={{opacity:0,scale:0,y:-100}}
+      whileInView={{opacity:1,scale:1,y:0}}
+      viewport={{ once: true }}
+      transition={{ duration: 1, delay: 0.2 }}
+      >
+        <Row  className={challenge.id === 1 ? "align-items-center" : "align-items-center mt-5"}>
           <Col md={5} >
             <div>
               <img src={challenge.img} alt="" className="img-fluid d-block mx-auto"/>
@@ -23,8 +31,16 @@ const ChallengeBox = (props) => {
               </div>
             </Col>
         </Row>
+        </motion.div>
       :
-      <Row key={key} className="align-items-center mt-5">
+      <motion.div
+      key={key}
+      initial={{opacity:0,scale:0,y:-100}}
+      whileInView={{opacity:1,scale:1,y:0}}
+      viewport={{ once: true }}
+      transition={{ duration: 1, delay: 0.2 }}
+      >
+      <Row className="align-items-center mt-5">
         <Col md={6}>
           <div className="mb-4">
             <div className="my-4">
@@ -41,6 +57,7 @@ const ChallengeBox = (props) => {
           </div>
         </Col>
       </Row>
+      </motion.div>
       )
     }
     </>
