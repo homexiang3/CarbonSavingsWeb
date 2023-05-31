@@ -1,7 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). The project provides a landing page for the application CarbonSavings with a free carbon footprint calculator tool.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). The project provides a landing page for the application CarbonSavings with an open-source carbon footprint calculator tool.
 ## Credits
 
-Credits to [https://github.com/easywebsify/next-landing-page](landing page template).
+Credits to the following [Next.js landing page tutorial](https://github.com/easywebsify/next-landing-page).
 ## Getting Started
 
 First, run the development server:
@@ -16,9 +16,9 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file. The different web sections are created under the 'components' folder.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/calculator](http://localhost:3000/api/calculator). This endpoint can be edited in `pages/api/calculator.js`.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/calculator](http://localhost:3000/api/calculator). This endpoint can be edited in `pages/api/calculator.js` and provide an initial approach of an open-source API with our conversion metrics.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
