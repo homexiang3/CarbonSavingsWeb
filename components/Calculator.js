@@ -39,19 +39,6 @@ const FormField = (props) => {
         </Row>
 );}
 
-const useViewport = () => {
-  const [width, setWidth] = React.useState(0);
-
-  React.useEffect(() => {
-    const handleWindowResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handleWindowResize);
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, []);
-
-  // Return the width so we can use it in our components
-  return { width };
-}
-
 const Calculator = () => {
 
   const [values, setValues] = useState({
@@ -144,9 +131,6 @@ const Calculator = () => {
   useEffect(() => getSum(transportConversions,setTransportTotal), transportConversions);
   useEffect(() => getSum(foodConversions,setFoodTotal), foodConversions);
 
-  const { width } = useViewport();
-  const breakpoint = 768;
-
 //CALCULATOR RENDER
   return (
     <section className="section" id="calculator">
@@ -161,21 +145,12 @@ const Calculator = () => {
             <Row>
               <div className="calculator-tabs">
               <Tabs className = "Tabs bg-light shadow">
-              {width < breakpoint ?
                 <TabList>
                 <Tab><MdHome size={24}/> </Tab>
                 <Tab><MdDirectionsCar size={24}/></Tab>
                 <Tab><MdRestaurant size={24}/></Tab>
                 <Tab><MdAnalytics size={24}/></Tab>
               </TabList>
-              :
-                <TabList>
-                  <Tab><h5>Home</h5> <MdHome size={24}/> </Tab>
-                  <Tab><h5>Transport</h5> <MdDirectionsCar size={24}/></Tab>
-                  <Tab><h5>Food</h5> <MdRestaurant size={24}/></Tab>
-                  <Tab><h5>Results</h5> <MdAnalytics size={24}/></Tab>
-                </TabList>
-              }
                 <TabPanel>
                   <Row className="mt-5">
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
