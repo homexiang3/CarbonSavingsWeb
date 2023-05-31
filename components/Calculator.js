@@ -99,7 +99,7 @@ const Calculator = () => {
   const handleValue = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-    let conversion = (parseFloat(value)*parseFloat(e.target.getAttribute('conversion'))).toFixed(4);
+    let conversion = (parseFloat(value)*parseFloat(e.target.getAttribute('conversion'))).toFixed(2);
     setValues({
       ...values,
       [name]: value
@@ -120,12 +120,12 @@ const Calculator = () => {
     const sectionValues = Object.values(sectionConversions);
     const sectionCleanValues = sectionValues.filter(Boolean)
     let sectionSum = sectionCleanValues.reduce((acc, c) => acc + c, 0);
-    sectionFunc(parseFloat(sectionSum).toFixed(4));
+    sectionFunc(parseFloat(sectionSum).toFixed(2));
     //change total values
     const totalValues = Object.values(conversions);
     const totalCleanValues = totalValues.filter(Boolean)
     let totalSum = totalCleanValues.reduce((acc, c) => acc + c, 0);
-    setTotal(parseFloat(totalSum).toFixed(4));
+    setTotal(parseFloat(totalSum).toFixed(2));
   }
   useEffect(() => getSum(homeConversions,setHomeTotal), homeConversions);
   useEffect(() => getSum(transportConversions,setTransportTotal), transportConversions);
@@ -172,7 +172,7 @@ const Calculator = () => {
                       <Alert color="warning" fade={false}>
                         <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Reduce household consumption and use renewable energies
                       </Alert>
-                      <h5>Home Carbon Footprint: <span id="home-result">{homeTotal}</span> Kg/CO<sub>2</sub>e</h5>
+                      <h5>Home Carbon Footprint: <span id="home-result">{homeTotal.toString().replace(".",",")}</span> Kg/CO<sub>2</sub>e</h5>
                     </Col>
                   </Row>
                 </TabPanel>
@@ -193,9 +193,9 @@ const Calculator = () => {
                   <Row className="text-center mt-5">
                     <Col lg={{size:8,offset:2}}>
                       <Alert color="warning" fade={false}>
-                        <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Use public & shared transport alternatives and avoid flights
+                        <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Walk, bike or take public transport. Avoid flights, especially on short distances.
                       </Alert>
-                      <h5>Transport Carbon Footprint: <span id="transport-result">{transportTotal}</span> Kg/CO<sub>2</sub>e</h5>
+                      <h5>Transport Carbon Footprint: <span id="transport-result">{transportTotal.toString().replace(".",",")}</span> Kg/CO<sub>2</sub>e</h5>
                     </Col>
                   </Row>
                 </TabPanel>
@@ -216,9 +216,9 @@ const Calculator = () => {
                   <Row className="text-center mt-5">
                     <Col lg={{size:8,offset:2}}>
                       <Alert color="warning" fade={false}>
-                        <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Reduce animal consumption and introduce more fruits, vegetables and cereals
+                        <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Reduce animal consumption and introduce more fruits, vegetables and cereals. Throw away less food.
                       </Alert>
-                      <h5>Food Carbon Footprint: <span id="food-result">{foodTotal}</span> Kg/CO<sub>2</sub>e</h5>
+                      <h5>Food Carbon Footprint: <span id="food-result">{foodTotal.toString().replace(".",",")}</span> Kg/CO<sub>2</sub>e</h5>
                     </Col>
                   </Row>
                 </TabPanel>
@@ -227,10 +227,10 @@ const Calculator = () => {
                   <Row>
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
                       <h5 className='mt-4'>User Carbon Footprint</h5>
-                      <p className="mt-4">Home Carbon Footprint: <span className="fw-bold">{homeTotal} Kg/CO<sub>2</sub>e</span></p>
-                      <p className="mt-4">Transport Carbon Footprint: <span className="fw-bold">{transportTotal} Kg/CO<sub>2</sub>e</span></p>
-                      <p className="mt-4">Food Carbon Footprint: <span className="fw-bold">{foodTotal} Kg/CO<sub>2</sub>e</span></p>
-                      <p className="mt-4 text-carbonsavings">Total Carbon Footprint: <span className="fw-bold">{total} Kg/CO<sub>2</sub>e</span></p>
+                      <p className="mt-4">Home Carbon Footprint: <span className="fw-bold">{homeTotal.toString().replace(".",",")} Kg/CO<sub>2</sub>e</span></p>
+                      <p className="mt-4">Transport Carbon Footprint: <span className="fw-bold">{transportTotal.toString().replace(".",",")} Kg/CO<sub>2</sub>e</span></p>
+                      <p className="mt-4">Food Carbon Footprint: <span className="fw-bold">{foodTotal.toString().replace(".",",")} Kg/CO<sub>2</sub>e</span></p>
+                      <p className="mt-4 text-carbonsavings">Total Carbon Footprint: <span className="fw-bold">{total.toString().replace(".",",")} Kg/CO<sub>2</sub>e</span></p>
                     </Col>
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
                       <h5 className='mt-3'>Average Carbon Footprint</h5>
