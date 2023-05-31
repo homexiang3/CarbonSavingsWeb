@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, UncontrolledCarousel } from "reactstrap";
 import {MdLock, MdPayments, MdInsertChart, MdGroups} from 'react-icons/md'
 
 const Feature = () => {
@@ -9,7 +9,32 @@ const Feature = () => {
     { title : "Engage and connect", icon: <MdGroups size={32}/>,desc : "Join and build a vibrant community who are passionate about sustainable mobility. Share your archievements, inspire others and and foster friendly competition through our daily leaderboards." },
     { title : "Security and transparency", icon: <MdLock size={32}/>,desc : "Benefit from the robustness of blockchain technology and leverage the power of Ethereum. Enjoy the advantages of a decentralized, transparent, and secure platform that ensures the reliable management of your data." },
   ]
-
+  const carouselItems = [
+    {
+      src: '/images/Carousel1.png',
+      altText: 'Slide 1',
+      caption: 'Slide 1',
+      header: 'Slide 1 Header'
+    },
+    {
+      src: '/images/Carousel2.png',
+      altText: 'Slide 2',
+      caption: 'Slide 2',
+      header: 'Slide 2 Header'
+    },
+    {
+      src: '/images/Carousel3.png',
+      altText: 'Slide 3',
+      caption: 'Slide 3',
+      header: 'Slide 3 Header'
+    },
+    {
+      src: '/images/Carousel4.png',
+      altText: 'Slide 3',
+      caption: 'Slide 3',
+      header: 'Slide 3 Header'
+    }
+  ]
   const technologies = [
     { src: "/images/Kotlin.png", text: "Kotlin", link: "https://kotlinlang.org/"},
     { src: "/images/JetpackCompose.png", text: "Jetpack Compose", link: "https://developer.android.com/jetpack/compose/"},
@@ -48,7 +73,7 @@ const Feature = () => {
           </Row>
         </Col>
         <Col lg={{size:5, offset:0}} md={{size:8, offset:2}}>
-        <img src="/images/Carousel1.png" alt="" className="mt-5 img-fluid mx-auto d-block feature-img"/>
+          <UncontrolledCarousel controls={false} indicators={false} interval={5000} className="mt-5" items={carouselItems}/>
         </Col>
         </Row>
         <Row className="mt-5 text-center">
