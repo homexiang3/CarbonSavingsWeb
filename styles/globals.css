@@ -103,18 +103,8 @@ a.text-carbonsavings:hover{
   border-bottom-right-radius: 2rem !important;
   border-top-right-radius: 2rem !important;
 }
- 
-
-/*CAROUSEL*/
-.carousel-caption{
-  display:none !important;
-}
-.carousel-control-next,
-.carousel-control-prev , .carousel-indicators  {
-    filter: invert(100%);
-}
-.carousel-item img {
-  height: 450px;
+.feature-img{
+  height:450px;
 }
 /* Technologies */
 .technology-img-wrapper{
