@@ -30,7 +30,7 @@ const FormField = (props) => {
               id={props.resultId}
               min = "0"
               name={props.resultId}
-              placeholder="Kg/CO2e"
+              placeholder="kgCO2e"
               type="number"
               value = {props.conversionVal}
               readOnly = {true}
@@ -152,18 +152,23 @@ const Calculator = () => {
                 <Tab><MdAnalytics size={24}/></Tab>
               </TabList>
                 <TabPanel>
+                <Row className="text-center mt-5">
+                    <Col lg={{size:8,offset:2}}>
+                      <h4>Home Consumption</h4>
+                    </Col>
+                </Row>
                   <Row className="mt-5">
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
-                      <FormField label="Electricity" inputId="electricity" inputVal={values.electricity} conversionVal={conversions.celectricity} inputFunction ={handleValue} inputPlaceholder="Annual KWh" resultId="celectricity" conversion="0.273" />
+                      <FormField label="Electricity" inputId="electricity" inputVal={values.electricity} conversionVal={conversions.celectricity} inputFunction ={handleValue} inputPlaceholder="Annual kWh" resultId="celectricity" conversion="0.273" />
                       <FormField label="Natural Gas" inputId="naturalGas" inputVal={values.naturalGas} conversionVal={conversions.cnaturalGas} inputFunction ={handleValue} inputPlaceholder="Annual m3" resultId="cnaturalGas" conversion="2.124"/>
-                      <FormField label="Diesel" inputId="diesel" inputVal={values.diesel} conversionVal={conversions.cdiesel} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cdiesel" conversion="2.883"/>
-                      <FormField label="GLP" inputId="glp" inputVal={values.glp} conversionVal={conversions.cglp} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cglp" conversion="2.985"/>
+                      <FormField label="Diesel" inputId="diesel" inputVal={values.diesel} conversionVal={conversions.cdiesel} inputFunction ={handleValue} inputPlaceholder="Annual kg" resultId="cdiesel" conversion="2.883"/>
+                      <FormField label="GLP" inputId="glp" inputVal={values.glp} conversionVal={conversions.cglp} inputFunction ={handleValue} inputPlaceholder="Annual kg" resultId="cglp" conversion="2.985"/>
                     </Col>
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
-                      <FormField  label="Propane" inputId="propane" inputVal={values.propane} conversionVal={conversions.cpropane} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cpropane" conversion="2.94"/>
-                      <FormField  label="Butane" inputId="butane" inputVal={values.butane} conversionVal={conversions.cbutane} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cbutane" conversion="2.96"/>
-                      <FormField  label="Wood" inputId="wood" inputVal={values.wood} conversionVal={conversions.cwood} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cwood" conversion="1.747"/>
-                      <FormField  label="Coal" inputId="coal" inputVal={values.coal} conversionVal={conversions.ccoal} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="ccoal" conversion="2.667"/>
+                      <FormField  label="Propane" inputId="propane" inputVal={values.propane} conversionVal={conversions.cpropane} inputFunction ={handleValue} inputPlaceholder="Annual kg" resultId="cpropane" conversion="2.94"/>
+                      <FormField  label="Butane" inputId="butane" inputVal={values.butane} conversionVal={conversions.cbutane} inputFunction ={handleValue} inputPlaceholder="Annual kg" resultId="cbutane" conversion="2.96"/>
+                      <FormField  label="Wood" inputId="wood" inputVal={values.wood} conversionVal={conversions.cwood} inputFunction ={handleValue} inputPlaceholder="Annual kg" resultId="cwood" conversion="1.747"/>
+                      <FormField  label="Coal" inputId="coal" inputVal={values.coal} conversionVal={conversions.ccoal} inputFunction ={handleValue} inputPlaceholder="Annual kg" resultId="ccoal" conversion="2.667"/>
                     </Col>
                   </Row>
                   <Row className="text-center mt-5">
@@ -171,11 +176,16 @@ const Calculator = () => {
                       <Alert color="warning" fade={false}>
                         <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Reduce household consumption and use renewable energies
                       </Alert>
-                      <h5>Home Carbon Footprint: <span id="home-result">{homeTotal.toString().replace(".",",")}</span> Kg/CO<sub>2</sub>e</h5>
+                      <h5>Home Carbon Footprint: <span id="home-result">{homeTotal.toString().replace(".",",")}</span> kgCO<sub>2</sub>e</h5>
                     </Col>
                   </Row>
                 </TabPanel>
                 <TabPanel>
+                <Row className="text-center mt-5">
+                    <Col lg={{size:8,offset:2}}>
+                      <h4>Transport Consumption</h4>
+                    </Col>
+                </Row>
                   <Row className="mt-5">
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
                       <FormField label="Gasoline Car" inputId="gasolineCar" inputVal={values.gasolineCar} conversionVal={conversions.cgasolineCar} inputFunction ={handleValue} inputPlaceholder="Annual Km" resultId="cgasolineCar" conversion="0.18855"/>
@@ -194,22 +204,27 @@ const Calculator = () => {
                       <Alert color="warning" fade={false}>
                         <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Walk, bike or take public transport. Avoid flights, especially on short distances.
                       </Alert>
-                      <h5>Transport Carbon Footprint: <span id="transport-result">{transportTotal.toString().replace(".",",")}</span> Kg/CO<sub>2</sub>e</h5>
+                      <h5>Transport Carbon Footprint: <span id="transport-result">{transportTotal.toString().replace(".",",")}</span> kgCO<sub>2</sub>e</h5>
                     </Col>
                   </Row>
                 </TabPanel>
                 <TabPanel>
+                <Row className="text-center mt-5">
+                    <Col lg={{size:8,offset:2}}>
+                      <h4>Food Consumption</h4>
+                    </Col>
+                </Row>
                   <Row className="mt-5">
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
-                      <FormField label="Beef & Lamb" inputId="beefLamb" inputVal={values.beefLamb} conversionVal={conversions.cbeefLamb} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cbeefLamb" conversion="28.32"/>
-                      <FormField label="Shellfish" inputId="shellfish" inputVal={values.shellfish} conversionVal={conversions.cshellfish} inputFunction ={handleValue}inputPlaceholder="Annual Kg" resultId="cshellfish" conversion="14.71"/>
-                      <FormField label="Other meats & eggs" inputId="omeats" inputVal={values.omeats} conversionVal={conversions.comeats} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="comeats" conversion="4.82"/>
-                      <FormField label="fish" inputId="fish" inputVal={values.fish} conversionVal={conversions.cfish} inputFunction ={handleValue} inputPlaceholder="Annual Kg" resultId="cfish" conversion="4.41"/>
+                      <FormField label="Beef & Lamb" inputId="beefLamb" inputVal={values.beefLamb} conversionVal={conversions.cbeefLamb} inputFunction ={handleValue} inputPlaceholder="Annual kg" resultId="cbeefLamb" conversion="28.32"/>
+                      <FormField label="Shellfish" inputId="shellfish" inputVal={values.shellfish} conversionVal={conversions.cshellfish} inputFunction ={handleValue}inputPlaceholder="Annual kg" resultId="cshellfish" conversion="14.71"/>
+                      <FormField label="Other meats & eggs" inputId="omeats" inputVal={values.omeats} conversionVal={conversions.comeats} inputFunction ={handleValue} inputPlaceholder="Annual kg" resultId="comeats" conversion="4.82"/>
+                      <FormField label="fish" inputId="fish" inputVal={values.fish} conversionVal={conversions.cfish} inputFunction ={handleValue} inputPlaceholder="Annual kg" resultId="cfish" conversion="4.41"/>
                     </Col>
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
-                      <FormField label="Milk & yoghurt" inputId="milkYoghurt" inputVal={values.milkYoghurt} conversionVal={conversions.cmilkYoghurt} inputFunction ={handleValue}inputPlaceholder="Annual Kg" resultId="cmilkYoghurt" conversion="1.4"/>
-                      <FormField label="Cheese & butter" inputId="cheeseButter" inputVal={values.cheeseButter} conversionVal={conversions.ccheeseButter} inputFunction ={handleValue}inputPlaceholder="Annual Kg" resultId="ccheeseButter" conversion="10.19"/>
-                      <FormField label="Fruits & vegetables & cereals" inputId="fvc" inputVal={values.fvc} conversionVal={conversions.cfvc} inputFunction ={handleValue}inputPlaceholder="Annual Kg" resultId="cfvc" conversion="0.5"/>
+                      <FormField label="Milk & yoghurt" inputId="milkYoghurt" inputVal={values.milkYoghurt} conversionVal={conversions.cmilkYoghurt} inputFunction ={handleValue}inputPlaceholder="Annual kg" resultId="cmilkYoghurt" conversion="1.4"/>
+                      <FormField label="Cheese & butter" inputId="cheeseButter" inputVal={values.cheeseButter} conversionVal={conversions.ccheeseButter} inputFunction ={handleValue}inputPlaceholder="Annual kg" resultId="ccheeseButter" conversion="10.19"/>
+                      <FormField label="Fruits & vegetables & cereals" inputId="fvc" inputVal={values.fvc} conversionVal={conversions.cfvc} inputFunction ={handleValue}inputPlaceholder="Annual kg" resultId="cfvc" conversion="0.5"/>
                     </Col>
                   </Row>
                   <Row className="text-center mt-5">
@@ -217,23 +232,27 @@ const Calculator = () => {
                       <Alert color="warning" fade={false}>
                         <MdTipsAndUpdates size={24} color="warning" className="me-3"/>Tips - Reduce animal consumption and introduce more fruits, vegetables and cereals. Throw away less food.
                       </Alert>
-                      <h5>Food Carbon Footprint: <span id="food-result">{foodTotal.toString().replace(".",",")}</span> Kg/CO<sub>2</sub>e</h5>
+                      <h5>Food Carbon Footprint: <span id="food-result">{foodTotal.toString().replace(".",",")}</span> kgCO<sub>2</sub>e</h5>
                     </Col>
                   </Row>
                 </TabPanel>
                 <TabPanel>
-                <div className="text-center mt-5">
-                  <Row>
+                <Row className="text-center mt-5">
+                    <Col lg={{size:8,offset:2}}>
+                      <h4>Results</h4>
+                    </Col>
+                </Row>
+                  <Row className="text-center">
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
                       <h5 className='mt-4'>User Carbon Footprint</h5>
-                      <p className="mt-4">Home Carbon Footprint: <span className="fw-bold">{homeTotal.toString().replace(".",",")} Kg/CO<sub>2</sub>e</span></p>
-                      <p className="mt-4">Transport Carbon Footprint: <span className="fw-bold">{transportTotal.toString().replace(".",",")} Kg/CO<sub>2</sub>e</span></p>
-                      <p className="mt-4">Food Carbon Footprint: <span className="fw-bold">{foodTotal.toString().replace(".",",")} Kg/CO<sub>2</sub>e</span></p>
-                      <p className="mt-4 text-carbonsavings">Total Carbon Footprint: <span className="fw-bold">{total.toString().replace(".",",")} Kg/CO<sub>2</sub>e</span></p>
+                      <p className="mt-4">Home Carbon Footprint: <span className="fw-bold">{homeTotal.toString().replace(".",",")} kgCO<sub>2</sub>e</span></p>
+                      <p className="mt-4">Transport Carbon Footprint: <span className="fw-bold">{transportTotal.toString().replace(".",",")} kgCO<sub>2</sub>e</span></p>
+                      <p className="mt-4">Food Carbon Footprint: <span className="fw-bold">{foodTotal.toString().replace(".",",")} kgCO<sub>2</sub>e</span></p>
+                      <p className="mt-4 text-carbonsavings">Total Carbon Footprint: <span className="fw-bold">{total.toString().replace(".",",")} kgCO<sub>2</sub>e</span></p>
                     </Col>
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
                       <h5 className='mt-3'>Average Carbon Footprint</h5>
-                      <p className="mt-3">Global average Carbon Footprint: <span className="fw-bold">{globalAverage} Kg/CO<sub>2</sub>e</span></p>
+                      <p className="mt-3">Global average Carbon Footprint: <span className="fw-bold">{globalAverage} kgCO<sub>2</sub>e</span></p>
                       {total >= globalAverage ?
                         <Alert color="danger" className="mx-5" fade={false}>
                           <MdWarning size={24}  className="me-3"/>Worse or equal than global average!
@@ -243,7 +262,7 @@ const Calculator = () => {
                           <MdCheckCircle size={24}  className="me-3"/>Better than global average!
                         </Alert>
                       }
-                      <p className="mt-3">National average Carbon Footprint: <span className="fw-bold">{nationalAverage} Kg/CO<sub>2</sub>e</span></p>
+                      <p className="mt-3">National average Carbon Footprint: <span className="fw-bold">{nationalAverage} kgCO<sub>2</sub>e</span></p>
                       {total >= nationalAverage ?
                         <Alert color="danger" className="mx-5" fade={false}>
                           <MdWarning size={24} className="me-3"/>Worse or equal than national average!
@@ -255,7 +274,6 @@ const Calculator = () => {
                       }
                     </Col>
                   </Row>
-                  </div>
                 </TabPanel>
               </Tabs>
               </div>
