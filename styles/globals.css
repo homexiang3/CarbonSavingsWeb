@@ -114,7 +114,7 @@ a.text-carbonsavings:hover{
     filter: invert(100%);
 }
 .carousel-item img {
-  height: 450px;
+  max-height: 450px;
 }
 /* Technologies */
 .technology-img-wrapper{

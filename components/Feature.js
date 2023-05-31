@@ -11,25 +11,25 @@ const Feature = () => {
   ]
   const carouselItems = [
     {
-      src: '/images/Carousel1.PNG',
+      src: '/images/Carousel1.png',
       altText: 'Slide 1',
       caption: 'Slide 1',
       header: 'Slide 1 Header'
     },
     {
-      src: '/images/Carousel2.PNG',
+      src: '/images/Carousel2.png',
       altText: 'Slide 2',
       caption: 'Slide 2',
       header: 'Slide 2 Header'
     },
     {
-      src: '/images/Carousel3.PNG',
+      src: '/images/Carousel3.png',
       altText: 'Slide 3',
       caption: 'Slide 3',
       header: 'Slide 3 Header'
     },
     {
-      src: '/images/Carousel4.PNG',
+      src: '/images/Carousel4.png',
       altText: 'Slide 3',
       caption: 'Slide 3',
       header: 'Slide 3 Header'
@@ -61,10 +61,10 @@ const Feature = () => {
             features.map((service, key) =>
               <Col key={key} lg={6} md={6}>
                 <div>
-                  <div className="mb-5">
+                  <div className="mb-3">
                       <i className={service.icon}></i>
                   </div>
-                  <h5 className="text-carbonsavings font-weight-normal pt-1 mb-4"><span className="me-3">{service.icon}</span>{service.title}</h5>
+                  <h5 className="text-carbonsavings font-weight-normal pt-1 mb-3"><span className="me-3">{service.icon}</span>{service.title}</h5>
                   <p className="text-muted mb-4">{service.desc}</p>
                 </div>
               </Col>
