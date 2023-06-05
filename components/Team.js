@@ -3,7 +3,7 @@ import React from 'react';
 import { Container, Row, Col, Card, CardImg, CardBody,CardTitle, CardSubtitle} from "reactstrap";
 const Team = () => {
 return (
-    <section className="section bg-light" id="about">
+    <section className="section" id="about">
       <Container>
         <Row className="justify-content-center">
           <Col lg={6} md={8}>
@@ -17,7 +17,7 @@ return (
         </Row>
         <Row>
           <Col lg={{size:4, offset:0}} md={{ size: 8, offset: 2 }}>
-            <Card className="mb-4">
+            <Card className="mb-4 shadow-sm">
               <CardImg top width="100%" src="/images/Fabio.jpg" alt="Card image cap" />
               <CardBody className="text-center">
                 <CardTitle><h4>Fabio Della Valle</h4></CardTitle>
@@ -26,7 +26,7 @@ return (
             </Card>
           </Col>
           <Col lg={{size:4, offset:0}} md={{ size: 8, offset: 2 }}>
-          <Card className="mb-4">
+          <Card className="mb-4 shadow-sm">
               <CardImg top width="100%" src="/images/HongMing.jpg" alt="Card image cap" />
               <CardBody className="text-center">
                 <CardTitle><h4>Hong-ming Xiang Vico</h4></CardTitle>
@@ -35,7 +35,7 @@ return (
             </Card>
           </Col>
           <Col lg={{size:4, offset:0}} md={{ size: 8, offset: 2 }}>
-          <Card>
+          <Card className="shadow-sm">
               <CardImg top width="100%" src="/images/Miquel.png" alt="Card image cap" />
               <CardBody className="text-center">
                 <CardTitle><h4>Miquel Oliver Riera</h4></CardTitle>

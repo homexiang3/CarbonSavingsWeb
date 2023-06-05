@@ -23,19 +23,19 @@ a {
 }
 
 .text-carbonsavings{
-  color: #4b8253;
+  color: #4B8523;
 }
 a.text-carbonsavings:hover{
-  color:#223c26 ;
+  color:#335b18 ;
 }
 
 .btn-carbonsavings{
   color: white;
-  background-color:#4b8253 ;
+  background-color:#4B8523 ;
 }
 .btn-carbonsavings:hover{
   color: white;
-  background-color:#223c26 ;
+  background-color:#335b18 ;
 }
 /* Team */
 .upf-img{
@@ -81,9 +81,9 @@ a.text-carbonsavings:hover{
 }
 
 .react-tabs__tab--selected {
-  background: #93ce9c !important;
+  background: #4B8523 !important;
   border-radius:0px !important;
-  border-color:#93ce9c !important;
+  border-color:#4B8523 !important;
   border-bottom:0px !important;
 }
 .react-tabs__tab:focus:after {
