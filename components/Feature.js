@@ -11,25 +11,25 @@ const Feature = () => {
   ]
   const carouselItems = [
     {
-      src: '/images/Carousel1.png',
+      src: '/images/Carousel1.PNG',
       altText: 'Slide 1',
       caption: 'Slide 1',
       header: 'Slide 1 Header'
     },
     {
-      src: '/images/Carousel2.png',
+      src: '/images/Carousel2.PNG',
       altText: 'Slide 2',
       caption: 'Slide 2',
       header: 'Slide 2 Header'
     },
     {
-      src: '/images/Carousel3.png',
+      src: '/images/Carousel3.PNG',
       altText: 'Slide 3',
       caption: 'Slide 3',
       header: 'Slide 3 Header'
     },
     {
-      src: '/images/Carousel4.png',
+      src: '/images/Carousel4.PNG',
       altText: 'Slide 3',
       caption: 'Slide 3',
       header: 'Slide 3 Header'
