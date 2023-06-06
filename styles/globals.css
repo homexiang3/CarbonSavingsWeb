@@ -81,9 +81,9 @@ a.text-carbonsavings:hover{
 }
 
 .react-tabs__tab--selected {
-  background: #4B8523 !important;
+  background: #dbdbdb !important;
   border-radius:0px !important;
-  border-color:#4B8523 !important;
+  border-color:#dbdbdb   !important;
   border-bottom:0px !important;
 }
 .react-tabs__tab:focus:after {

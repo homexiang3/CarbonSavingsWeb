@@ -4,6 +4,7 @@ import { Container, Row, Col, Form, Label, Input, Alert } from 'reactstrap';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {MdHome, MdDirectionsCar, MdRestaurant, MdAnalytics, MdTipsAndUpdates, MdWarning, MdCheckCircle} from 'react-icons/md'
 import 'react-tabs/style/react-tabs.css';
+import BarChartExample from './Chart';
 
 const FormField = (props) => {
   return(
@@ -244,35 +245,36 @@ const Calculator = () => {
                 </Row>
                   <Row className="text-center">
                     <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
-                      <h5 className='mt-4'>User Carbon Footprint</h5>
+                      <h5 className='mt-5'>Total Carbon Footprint: <span className="fw-bold">{total.toString().replace(".",",")} kgCO<sub>2</sub>e</span></h5>
                       <p className="mt-4">Home Carbon Footprint: <span className="fw-bold">{homeTotal.toString().replace(".",",")} kgCO<sub>2</sub>e</span></p>
                       <p className="mt-4">Transport Carbon Footprint: <span className="fw-bold">{transportTotal.toString().replace(".",",")} kgCO<sub>2</sub>e</span></p>
                       <p className="mt-4">Food Carbon Footprint: <span className="fw-bold">{foodTotal.toString().replace(".",",")} kgCO<sub>2</sub>e</span></p>
-                      <p className="mt-4 text-carbonsavings">Total Carbon Footprint: <span className="fw-bold">{total.toString().replace(".",",")} kgCO<sub>2</sub>e</span></p>
                     </Col>
-                    <Col lg={{size:6, offset:0}} md={{size:8,offset:2}}>
-                      <h5 className='mt-3'>Average Carbon Footprint</h5>
-                      <p className="mt-3">Global average Carbon Footprint: <span className="fw-bold">{globalAverage} kgCO<sub>2</sub>e</span></p>
+                    <Col className="mt-5" lg={{size:6, offset:0}} md={{size:8,offset:2}}>
+                        <BarChartExample user={total} national={nationalAverage} global={globalAverage}/>
+                    </Col>
+                  </Row>
+                  <Row className="text-center">
+                  <Col lg={{size:10,offset:1}} className="mt-4">
                       {total >= globalAverage ?
                         <Alert color="danger" className="mx-5" fade={false}>
-                          <MdWarning size={24}  className="me-3"/>Worse or equal than global average!
+                          <MdWarning size={24}  className="me-3"/>{(((total/globalAverage)*100)-100).toFixed(2).replace(".",",")}% worse than global average!
                         </Alert>
                         :
                         <Alert color="success" className="mx-5" fade={false}>
-                          <MdCheckCircle size={24}  className="me-3"/>Better than global average!
+                          <MdCheckCircle size={24}  className="me-3"/>{(100-((total/globalAverage)*100)).toFixed(2).replace(".",",")}% better than global average!
                         </Alert>
                       }
-                      <p className="mt-3">National average Carbon Footprint: <span className="fw-bold">{nationalAverage} kgCO<sub>2</sub>e</span></p>
                       {total >= nationalAverage ?
                         <Alert color="danger" className="mx-5" fade={false}>
-                          <MdWarning size={24} className="me-3"/>Worse or equal than national average!
+                          <MdWarning size={24} className="me-3"/>{(((total/nationalAverage)*100)-100).toFixed(2).replace(".",",")}% worse than national average!
                         </Alert>
                         :
                         <Alert color="success" className="mx-5" fade={false}>
-                          <MdCheckCircle size={24}  className="me-3"/>Better than national average!
+                          <MdCheckCircle size={24}  className="me-3"/>{(100-((total/nationalAverage)*100)).toFixed(2).replace(".",",")}% better than national average!
                         </Alert>
                       }
-                    </Col>
+                  </Col>
                   </Row>
                 </TabPanel>
               </Tabs>
